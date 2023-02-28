@@ -1,0 +1,172 @@
+@font-face {
+    font-family: juliamono;
+    src: url("JuliaMono-Regular.woff2");
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.title {
+    text-align: center;
+    font-size: 4em;
+    padding: .25em;
+    font-family: juliamono;
+
+    margin-bottom: 1.5em;
+
+    user-select: none;
+}
+
+.lang {
+    color: coral;
+    font-weight: bold;
+}
+
+.interpreter {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25%;
+
+    width: 75%;
+    margin: auto;
+
+    padding: 2em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+    background-color: lightgray;
+
+    border: 2px solid black;
+    border-radius: 0.33em;
+}
+
+.interpreter-label {
+    margin-bottom: 0.25em;
+    margin-right: 1em;
+    
+    font-size: 1.5em;
+    font-family: juliamono;
+
+    text-align: left;
+    user-select: none;
+}
+
+.code-editor {
+    width: 100%;
+    min-height: 100px;
+
+    margin-right: auto;
+}
+
+#execute {
+    width: fit-content;
+    
+    padding: 0.25em;
+    margin-left: auto;
+    margin-top: 0.5em;
+
+    background: white;
+
+    font-family: juliamono;
+    font-size: 13pt;
+
+    border: 2px solid black;
+    border-radius: 0.33em;
+    user-select: none;
+
+    cursor: pointer;
+}
+
+.output {
+    resize: none;
+
+    font-family: juliamono;
+    font-size: 13pt;
+}
+
+.symbols-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 75%;
+    margin: auto;
+}
+
+.symbols {
+    display: flex;
+
+    margin: auto;
+    margin-bottom: 1em;
+
+    font-family: juliamono;
+
+    padding: 1em;
+
+    background-color: lightgray;
+
+    border: 2px solid black;
+    border-radius: 0.33em;
+}
+
+.symbols.normal{
+    width: 90%;
+}
+
+.symbols.big{
+    grid-column: 1 / span 2;
+    width: 95%;
+}
+
+.symbols-title {
+    margin-right: 1em;
+    font-size: 1.5em;
+    text-align: center;
+    user-select: none;
+}
+
+.symbol {
+    display: inline;
+    margin: auto;
+}
+
+.symbol > .repr {
+    min-width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    padding: 0.15em;
+
+    background-color: whitesmoke;
+    color: black;
+
+    text-align: center;
+
+    border: 2px solid rgb(80, 80, 80);
+    border-radius: 0.33em;
+    user-select: none;
+}
+
+.symbol > .repr:hover {
+    cursor: pointer;
+}
+
+.symbol > .name {
+    display: none;
+}
+
+.symbol > .description {
+    position: absolute;
+    display: none;
+    width: fit-content;
+
+    background-color: lightyellow;
+    border: 1px solid black;
+    user-select: none;
+    padding: 0.25em;
+}
+
+.symbol:hover > .description {
+    display: inherit;
+}
