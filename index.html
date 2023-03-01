@@ -41,11 +41,17 @@
         let button = document.getElementById('execute');
 
         button.onclick = _ => {
-            if (window.loading_tin === false) {
-                window.loading_tin = true;
-                let code = input.getValue();
-                output.value = window.execute_tin(code);
-                window.loading_tin = false;
+            try {
+                if (window.loading_tin === false) {
+                    window.loading_tin = true;
+                    let code = input.getValue();
+                    output.value = window.execute_tin(code);
+                    window.loading_tin = false;
+                }
+
+            } catch (err) {
+                console.error(err);
+                window.loadWASM();
             }
         };
 

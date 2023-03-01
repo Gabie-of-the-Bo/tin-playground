@@ -9,5 +9,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(process.env.PORT || 3001, () => {
-    console.log("Server opened in port localhost:3000!");
+    console.log("Server opened!");
 });

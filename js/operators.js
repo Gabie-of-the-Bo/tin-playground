@@ -75,8 +75,6 @@ let operators = [
             
             ['`', 'Pops \\(a\\), pushes \\(a\\) withouth its first element'],
             ['´', 'Pops \\(a\\), pushes \\(a\\) withouth its last element'],
-
-            ['$', 'Pops \\(a\\), prints \\(a\\)'],
         ]
     },
     {
@@ -92,6 +90,8 @@ let operators = [
             ['→.v', 'Pops \\(a\\), updates variable \'v\' with the value \\(a\\)'],
             ['.v', 'Pushes the value of the variable \'v\''],
             ['←v', 'Deletes variable \'v\''],
+
+            ['$', 'Pops \\(a\\), prints \\(a\\)'],
         ]
     },
     {
@@ -101,6 +101,7 @@ let operators = [
             ['|code|→|F|', 'Defines the instruction \'F\' as \'code\''],
 
             ['⟨...⟩', 'Code block'],
+            ['⦑...⦒', 'Context block. Recursion with ∇ inside this block will only call the program within the block'],
             ['{...}', 'Pops \\(a\\), execute code inside for each element in \\(a\\)'],
             ['[...]', 'Pops \\(a\\), execute code inside for each element in \\(a\\) and map each value with the last element in the stack at the end'],
             ['(...)', 'Execute code inside and push a vector containing every new value added to the stack from the start of the block'],
@@ -108,6 +109,8 @@ let operators = [
             ['?', 'Pops \\(a\\), skip next instruction if \\(a\\) is not truthy'],
             ['◊', 'Peeks \\(a\\), skip next instruction if \\(a\\) is not truthy'],
             [':', 'Pops \\(a\\), skip next instruction if \\(a\\) is truthy'],
+
+            ['∇', 'Calls the whole program recursively with the current stack. If enclosed in a context block, only the code within the block will be called'],
         ]
     },
 ];
