@@ -72,6 +72,10 @@ let operators = [
             
             [',', 'Pops \\(a\\) and peeks \\(b\\), pushes \\(a\\) into \\(b\\)'],
             ['_', 'Pops \\(a\\) and \\(b\\), pushes the concatenation of \\(a\\) and \\(b\\)'],
+            ['⨯', 'Pops \\(a\\) and \\(b\\), pushes a vector with the cartesian product of \\(a\\) and \\(b\\)'],
+            ['⨝', 'Pops \\(a\\) and \\(b\\), pushes a vector with every element of \\(a\\) and \\(b\\) in pairs'],
+            ['⊔', 'Pops \\(a\\), pushes a flattened version of \\(a\\)'],
+            ['⤾', 'Pops \\(a\\), pushes a reversed version of \\(a\\)'],
             
             ['`', 'Pops \\(a\\), pushes \\(a\\) withouth its first element'],
             ['´', 'Pops \\(a\\), pushes \\(a\\) withouth its last element'],
