@@ -7,6 +7,7 @@
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="./js/plotly/plotly-2.18.2.min.js"></script>
 </head>
 <body>
     <script src="js/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -21,10 +22,25 @@
 
     <div class="interpreter">
         <div class="interpreter-label">Program:</div>
-        <div class="interpreter-label">Output:</div>
+        <div class="interpreter-label">
+            Output: 
+            <button id="output-detection" class="output-detection"></button>
+        </div>
         <div id="program" class="code-editor"></div>
-        <textarea id="output" class="output ace-dracula" readonly></textarea>    
+        <div class="output-container">
+            <textarea id="output" class="output ace-dracula" readonly></textarea>
+            <span id="loader" class="loader"></span>
+        </div>
         <button id="execute">Execute</button>
+        <div id="time-taken" class="time-taken"></div>
+    </div>
+
+    <div id="graph" class="graph">
+        <div class="graph-topbar">
+            <div class="interpreter-label">Graph:</div>
+            <div id="exit" class="exit">⨯</div>
+        </div>
+        <div id="plot"></div>
     </div>
 
     <script>
@@ -34,24 +50,87 @@
             fontFamily: "juliamono",
             fontSize: "13pt"
         });
+
+        document.getElementById('exit').onclick = () => {
+            document.getElementById('graph').style.display = 'none';        
+        }
+
+        document.getElementById('output-detection').onclick = () => {
+            document.getElementById('graph').style.display = 'inherit';
+            let v = document.getElementById('output').value;
+            v = v.slice(1, v.length - 1);
+            
+            let data = v.split(',').map(i => Number(i.trim()));
+
+            let plotData = [
+                {
+                    x: [...data.keys()],
+                    y: data,
+                    type: 'scatter'
+                }
+            ];
+
+            let layout = {
+                autosize: true,
+            };
+
+            Plotly.newPlot('plot', plotData, layout);
+        };
+
+        function detectOutput() {
+            let det = document.getElementById('output-detection');
+            let out = document.getElementById('output');
+
+            let list = /^\[-?\d+(\.\d+)?(\s*,\s*-?\d+(\.\d+)?)*\]$/gm;
+
+            if (list.test(out.value)) {
+                det.innerHTML = 'Graph sequence';
+                det.style.display = 'inherit';
+            
+            } else {
+                det.innerHTML = '';
+                det.style.display = 'none';
+            }
+        }
     </script>
 
     <script>
+        detectOutput();
+
         let output = document.getElementById('output');
         let button = document.getElementById('execute');
 
         button.onclick = _ => {
-            try {
-                if (window.loading_tin === false) {
-                    window.loading_tin = true;
-                    let code = input.getValue();
-                    output.value = window.execute_tin(code);
-                    window.loading_tin = false;
-                }
+            if (window.loading_tin === false) {
+                window.loading_tin = true;
 
-            } catch (err) {
-                console.error(err);
-                window.loadWASM();
+                document.getElementById('loader').style = 'display: flex;';
+                output.value = '';
+                detectOutput();
+                
+                setTimeout(_ => {
+                    let startTime = performance.now();
+                    let endTime;            
+
+                    try {  
+                        let code = input.getValue();
+                        output.value = window.execute_tin(code);
+
+                        endTime = performance.now();
+
+                        detectOutput();
+                    } catch (err) {
+                        endTime = performance.now();
+                        console.error(err);
+                        window.loadWASM();
+                    }
+
+                    document.getElementById('loader').style.display = 'none';
+
+                    let taken = endTime - startTime;
+                    document.getElementById('time-taken').innerHTML = `<b>Execution time:</b> ${taken.toFixed(1)} ms`;
+                    window.loading_tin = false;
+                }, 50);
             }
         };
 

@@ -16,7 +16,9 @@ let operators = [
             ['⌉', 'Pops \\(a\\), pushes \\(\\lceil a \\rceil\\)'],
             ['⌋', 'Pops \\(a\\), pushes \\(\\lfloor a \\rfloor\\)'],
             
-            ['√', 'Pops \\(a\\), pushes \\(\\sqrt{a}\\)']
+            ['√', 'Pops \\(a\\), pushes \\(\\sqrt{a}\\)'],
+
+            ['⫰', 'Pushes a random number in the range \\([0, 1)\\)']
         ]
     },
     {
@@ -24,6 +26,7 @@ let operators = [
         size: 'normal',
         ops: [
             ['𝔹', 'Pops \\(a\\), pushes 1 if \\(a\\) is truthy or 0 if it is falsy'],
+            ['𝔽', 'Pops \\(a\\), pushes \\(a\\) converted to float. Useful for non-integer divisions'],
 
             ['¬', 'Pops \\(a\\), pushes \\(\\lnot a\\)'],
             ['∨', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\lor b\\) (logical or)'],
@@ -31,7 +34,9 @@ let operators = [
         
             ['=', 'Pops \\(a\\) and \\(b\\), pushes \\(a = b\\)'],
             ['<', 'Pops \\(a\\) and \\(b\\), pushes \\(a < b\\)'],
+            ['≤', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\leq b\\)'],
             ['>', 'Pops \\(a\\) and \\(b\\), pushes \\(a > b\\)'],
+            ['≥', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\geq b\\)'],
         
             ['∃', 'Pops \\(a\\), pushes 1 if \\(a\\) contains a truthy value, else 0'],
             ['∄', 'Pops \\(a\\), pushes 1 if \\(a\\) does not contain a truthy value, else 0'],
@@ -89,6 +94,7 @@ let operators = [
             ['!', 'Peeks \\(a\\), pushes \\(a\\)'],
             ['↶', 'Pops \\(a\\) and \\(b\\), pushes \\(b\\) and \\(a\\) (swap)'],
             ['↷', 'Pops \\(a\\), pushes a copy of the \\(a^{th}\\) element of the stack from the end'],
+            ['⋮', 'Pops \\(a\\), pushes every element of \\(a\\)'],
 
             ['→v', 'Pops \\(a\\), defines variable \'v\' with the value \\(a\\)'],
             ['→.v', 'Pops \\(a\\), updates variable \'v\' with the value \\(a\\)'],
@@ -106,9 +112,9 @@ let operators = [
 
             ['⟨...⟩', 'Code block'],
             ['⦑...⦒', 'Context block. Recursion with ∇ inside this block will only call the program within the block'],
-            ['{...}', 'Pops \\(a\\), execute code inside for each element in \\(a\\)'],
-            ['[...]', 'Pops \\(a\\), execute code inside for each element in \\(a\\) and map each value with the last element in the stack at the end'],
-            ['(...)', 'Execute code inside and push a vector containing every new value added to the stack from the start of the block'],
+            ['{...}', 'Pops \\(a\\), executes code inside for each element in \\(a\\)'],
+            ['[...]', 'Pops \\(a\\), executes code inside for each element in \\(a\\) and pushes an array with every new element added to the stack from the start of the block at the end of each iteration'],
+            ['(...)', 'Executes code inside and push a vector containing every new value added to the stack from the start of the block'],
 
             ['?', 'Pops \\(a\\), skip next instruction if \\(a\\) is not truthy'],
             ['◊', 'Peeks \\(a\\), skip next instruction if \\(a\\) is not truthy'],
