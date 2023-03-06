@@ -44,7 +44,10 @@
     </div>
 
     <script>
-        var input = ace.edit("program");
+        var input = ace.edit("program", {
+            mode: "ace/mode/tin",
+            maxLines: 13
+        });
         input.setTheme("ace/theme/dracula");
         input.setOptions({
             fontFamily: "juliamono",

@@ -81,6 +81,7 @@ let operators = [
             ['⨝', 'Pops \\(a\\) and \\(b\\), pushes a vector with every element of \\(a\\) and \\(b\\) in pairs'],
             ['⊔', 'Pops \\(a\\), pushes a flattened version of \\(a\\)'],
             ['⤾', 'Pops \\(a\\), pushes a reversed version of \\(a\\)'],
+            ['⊞', 'Pops \\(a\\) and \\(b\\), pushes all subvectors of \\(b\\) given by a rolling window of size \\(a\\)'],
             
             ['`', 'Pops \\(a\\), pushes \\(a\\) withouth its first element'],
             ['´', 'Pops \\(a\\), pushes \\(a\\) withouth its last element'],
@@ -101,20 +102,22 @@ let operators = [
             ['.v', 'Pushes the value of the variable \'v\''],
             ['←v', 'Deletes variable \'v\''],
 
-            ['$', 'Pops \\(a\\), prints \\(a\\)'],
+            ['$', 'Pops \\(a\\), prints \\(a\\). Use *$ for strings. Add \'.\' just before the $ in order to end the line after printing.'],
         ]
     },
     {
         name: 'Meta',
         size: 'normal',
         ops: [
+            ['∴', 'Comment. Can be finished with another \'∴\' or with a line jump'],
+            
             ['|code|→|F|', 'Defines the instruction \'F\' as \'code\''],
 
-            ['⟨...⟩', 'Code block'],
-            ['⦑...⦒', 'Context block. Recursion with ∇ inside this block will only call the program within the block'],
-            ['{...}', 'Pops \\(a\\), executes code inside for each element in \\(a\\)'],
-            ['[...]', 'Pops \\(a\\), executes code inside for each element in \\(a\\) and pushes an array with every new element added to the stack from the start of the block at the end of each iteration'],
-            ['(...)', 'Executes code inside and push a vector containing every new value added to the stack from the start of the block'],
+            ['⟨⋯⟩', 'Code block'],
+            ['⦑⋯⦒', 'Context block. Recursion with ∇ inside this block will only call the program within the block'],
+            ['{⋯}', 'Pops \\(a\\), executes code inside for each element in \\(a\\)'],
+            ['[⋯]', 'Pops \\(a\\), executes code inside for each element in \\(a\\) and pushes an array with every new element added to the stack from the start of the block at the end of each iteration'],
+            ['(⋯)', 'Executes code inside and push a vector containing every new value added to the stack from the start of the block'],
 
             ['?', 'Pops \\(a\\), skip next instruction if \\(a\\) is not truthy'],
             ['◊', 'Peeks \\(a\\), skip next instruction if \\(a\\) is not truthy'],

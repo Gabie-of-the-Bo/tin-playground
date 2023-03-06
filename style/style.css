@@ -78,7 +78,7 @@ body {
 
 .code-editor {
     width: 100%;
-    min-height: 100px;
+    min-height: 260px;
 
     margin-right: auto;
 }
@@ -223,6 +223,7 @@ body {
 
 .symbol:hover > .description {
     display: inherit;
+    z-index: 100000;
 }
 
 .graph {
