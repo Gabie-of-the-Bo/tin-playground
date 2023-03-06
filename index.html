@@ -32,7 +32,10 @@
             <textarea id="output" class="output ace-dracula" readonly></textarea>
             <span id="loader" class="loader"></span>
         </div>
-        <button id="execute">Execute</button>
+        <div class="execution-container">        
+            <div id="character-count" class="character-count"><b>Characters:</b> 0</div>
+            <button id="execute">Execute</button>
+        </div>
         <div id="time-taken" class="time-taken"></div>
     </div>
 
@@ -53,6 +56,10 @@
         input.setOptions({
             fontFamily: "juliamono",
             fontSize: "13pt"
+        });
+        
+        input.getSession().on('change', function() {
+            document.getElementById('character-count').innerHTML = `<b>Characters:</b> ${input.getValue().length}`;
         });
 
         document.getElementById('exit').onclick = () => {

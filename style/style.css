@@ -115,6 +115,24 @@ body {
     user-select: none;
 }
 
+.execution-container {
+    display: flex;
+    align-items: center;
+}
+
+.character-count {
+    width: fit-content;
+    
+    padding: 0.25em;
+    margin-right: auto;
+    margin-top: 0.5em;
+
+    font-family: juliamono;
+    font-size: 13pt;
+
+    user-select: none;
+}
+
 .output-container {
     position: relative;
 }
@@ -309,4 +327,3 @@ body {
       opacity: 0.5;
     }
   }
-      
