@@ -2,7 +2,16 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>Tin Language</title>
+    <title>The Tin Playground</title>
+
+    <link rel="apple-touch-icon" sizes="76x76" href="style/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="style/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="style/favicon/favicon-16x16.png">
+    <link rel="manifest" href="style/favicon/site.webmanifest">
+    <link rel="mask-icon" href="style/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="stylesheet" href="./style/style.css">
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -22,7 +31,10 @@
     <script src="js/operators.js"></script>
 
     <div class="interpreter">
-        <div class="interpreter-label">Program:</div>
+        <div class="interpreter-label">
+            Program:
+            <button id="share" class="output-detection">Copy code URL</button>
+        </div>
         <div class="interpreter-label">
             Output: 
             <button id="output-detection" class="output-detection"></button>
@@ -34,7 +46,7 @@
         </div>
         <div class="execution-container">        
             <div id="character-count" class="character-count"><b>Characters:</b> 0</div>
-            <button id="execute">Execute</button>
+            <button id="execute">Execute<span style="font-size: 8pt;"> [Ctrl-Enter]</span></button>
         </div>
         <div id="time-taken" class="time-taken"></div>
     </div>
@@ -62,8 +74,23 @@
             document.getElementById('character-count').innerHTML = `<b>Characters:</b> ${input.getValue().length}`;
         });
 
+        document.body.onload = () => {
+            const queryString = decodeURI(window.location.search);
+            const urlParams = new URLSearchParams(queryString);
+            const code = urlParams.get('code');
+
+            if (code) {
+                input.setValue(code);
+                input.clearSelection();
+            }
+        };
+
         document.getElementById('exit').onclick = () => {
             document.getElementById('graph').style.display = 'none';        
+        }
+
+        document.getElementById('share').onclick = () => {
+            navigator.clipboard.writeText(`${window.location.origin}/?code=${encodeURIComponent(input.getValue())}`);
         }
 
         document.getElementById('output-detection').onclick = () => {
@@ -133,6 +160,7 @@
                     } catch (err) {
                         endTime = performance.now();
                         console.error(err);
+                        output.value = "Unexpected execution error";
                         window.loadWASM();
                     }
 

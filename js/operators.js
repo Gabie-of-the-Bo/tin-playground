@@ -26,13 +26,15 @@ let operators = [
         size: 'normal',
         ops: [
             ['𝔹', 'Pops \\(a\\), pushes 1 if \\(a\\) is truthy or 0 if it is falsy'],
-            ['𝔽', 'Pops \\(a\\), pushes \\(a\\) converted to float. Useful for non-integer divisions'],
 
             ['¬', 'Pops \\(a\\), pushes \\(\\lnot a\\)'],
             ['∨', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\lor b\\) (logical or)'],
             ['∧', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\land b\\) (logical and)'],
         
             ['=', 'Pops \\(a\\) and \\(b\\), pushes \\(a = b\\)'],
+            ['≠', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\neq b\\)'],
+            ['≡', 'Pops \\(a\\) and \\(b\\), pushes 1 if \\(a\\) contains a value equivalent to \\(b\\) or 0 otherwise (not vectorizable)'],
+            ['≢', 'Pops \\(a\\) and \\(b\\), pushes 1 if \\(a\\) contains a value not equivalent to \\(b\\) or 0 otherwise (not vectorizable)'],
             ['<', 'Pops \\(a\\) and \\(b\\), pushes \\(a < b\\)'],
             ['≤', 'Pops \\(a\\) and \\(b\\), pushes \\(a \\leq b\\)'],
             ['>', 'Pops \\(a\\) and \\(b\\), pushes \\(a > b\\)'],
@@ -47,6 +49,8 @@ let operators = [
         name: 'Arrays',
         size: 'big',
         ops: [
+            ['𝔽', 'Pops \\(a\\), pushes \\(a\\) converted to float. Useful for non-integer divisions'],
+
             ['ι', 'Pops \\(a\\), pushes an array from 0 to \\(a\\) (exclusive)'],
             ['□', 'Pops \\(a\\), pushes an array containing \\(a\\)'],
 
@@ -94,6 +98,8 @@ let operators = [
             ['¡', 'Pops \\(a\\)'],
             ['!', 'Peeks \\(a\\), pushes \\(a\\)'],
             ['↶', 'Pops \\(a\\) and \\(b\\), pushes \\(b\\) and \\(a\\) (swap)'],
+            ['*↶', 'Pops \\(a\\), \\(b\\) and \\(c\\), pushes \\(b\\) and \\(c\\) and \\(a\\) (prev swap)'],
+            ['.↶', 'Pops \\(a\\), swaps the \\(a^{th}\\) element from the end of the stack with the last one'],
             ['↷', 'Pops \\(a\\), pushes a copy of the \\(a^{th}\\) element of the stack from the end'],
             ['⋮', 'Pops \\(a\\), pushes every element of \\(a\\)'],
 
@@ -110,9 +116,10 @@ let operators = [
         size: 'normal',
         ops: [
             ['∴', 'Comment. Can be finished with another \'∴\' or with a line jump'],
-            
+
             ['|code|→|F|', 'Defines the instruction \'F\' as \'code\''],
 
+            ['⟬⋯⟭', 'While block. Pops \\(a\\) at the end and repeats from the start if \\(a\\) is truthy'],
             ['⟨⋯⟩', 'Code block'],
             ['⦑⋯⦒', 'Context block. Recursion with ∇ inside this block will only call the program within the block'],
             ['{⋯}', 'Pops \\(a\\), executes code inside for each element in \\(a\\)'],
