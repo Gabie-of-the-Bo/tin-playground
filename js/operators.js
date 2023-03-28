@@ -52,7 +52,6 @@ let operators = [
             ['𝔽', 'Pops \\(a\\), pushes \\(a\\) converted to float. Useful for non-integer divisions'],
 
             ['ι', 'Pops \\(a\\), pushes an array from 0 to \\(a\\) (exclusive)'],
-            ['□', 'Pops \\(a\\), pushes an array containing \\(a\\)'],
 
             ['↓', 'Pops \\(a\\) and \\(b\\), pushes \\(a^{th}\\) element of \\(b\\)'],
             ['*↓', 'Pops \\(a\\) and peeks \\(b\\), pushes \\(a^{th}\\) element of \\(b\\)'],
